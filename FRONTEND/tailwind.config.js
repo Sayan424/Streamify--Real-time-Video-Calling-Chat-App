@@ -6,8 +6,16 @@ export default {
   theme: {
     extend: {
       boxShadow: {
-        bgshadow: "0px 0px 30px 0px #5C3C7D",
+        bgshadow: "0px 0px 20px 0px #5C3C7D",
       },
+      animation: {
+        "spin-slow": "spin 1s linear infinite",
+      },
+    },
+    colors: {
+      baseColor: "#8A48CE",
+      gradient: "#c496f5",
+      neutralColor: "#5C3C7D",
     },
   },
   plugins: [daisyui],
