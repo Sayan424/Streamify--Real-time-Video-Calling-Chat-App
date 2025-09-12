@@ -25,9 +25,15 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />}
+          element={
+            isAuthenticated && isOnboarded ? (
+              <HomePage />
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
+            )
+          }
         ></Route>
-        {/*authenticated user -> homePage & non-authenticated user-> loginPage */}
+        {/*authenticated && onboarded user -> homePage & non-authenticated user-> loginPage & authenticated user -> inboarding page */}
         <Route
           path="/signup"
           element={!isAuthenticated ? <SignUpPage /> : <Navigate to="/" />}
