@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ShipWheelIcon } from "lucide-react";
+import { ShipWheelIcon, Webhook } from "lucide-react";
 import { Link } from "react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -36,8 +36,8 @@ const SignUpPage = () => {
         {/* signup form left side */}
         <div className="w-full lg:w-1/2 p-4 sm:p-8 flex flex-col">
           {/* logo */}
-          <div className="mb-4 flex items-center justify-start gap-2">
-            <ShipWheelIcon className="size-9 text-baseColor" />
+          <div className="mb-4 flex items-center justify-start gap-3">
+            <Webhook className="size-9 text-baseColor" />
             <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-baseColor to-gradient tracking-wider">
               Streamify
             </span>
@@ -58,8 +58,8 @@ const SignUpPage = () => {
                     Account Creation In Process
                   </h2>
                   <p className="text-sm opacity-70">
-                    Join <b>Streamify</b> and start your language learning
-                    adventure!
+                    Your passport to global conversations starts with{" "}
+                    <b>Streamify</b>.
                   </p>
                 </div>
                 <div className="space-y-3">
