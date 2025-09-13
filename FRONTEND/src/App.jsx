@@ -36,15 +36,27 @@ const App = () => {
         {/*authenticated && onboarded user -> homePage & non-authenticated user-> loginPage & authenticated user -> inboarding page */}
         <Route
           path="/signup"
-          element={!isAuthenticated ? <SignUpPage /> : <Navigate to="/" />}
+          element={
+            !isAuthenticated ? (
+              <SignUpPage />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         ></Route>
-        {/*non-authenticated user-> signUpPage & authenticated user -> homePage   */}
+        {/*non-authenticated user-> signUpPage & authenticated user -> homePage or if the user is not onboarded -> "OnboardingPage"   */}
 
         <Route
           path="/login"
-          element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />}
+          element={
+            !isAuthenticated ? (
+              <LoginPage />
+            ) : (
+              <Navigate to={isOnboarded ? "/" : "/onboarding"} />
+            )
+          }
         ></Route>
-        {/*non-authenticated user-> loginPage & authenticated user -> homePage   */}
+        {/*non-authenticated user-> loginPage & authenticated user -> homePage or if the user is not onboarded -> "OnboardingPage"   */}
 
         <Route
           path="/notifications"
@@ -80,7 +92,7 @@ const App = () => {
             )
           }
         ></Route>
-        {/*authenticated user -> OnboardingPage & non-authenticated user-> loginPage */}
+        {/*authenticated user -> if not onboarded "OnboardingPage" or "homepage" && non-authenticated user-> loginPage */}
       </Routes>
       <Toaster />
     </div>
