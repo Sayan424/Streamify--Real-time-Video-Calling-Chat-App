@@ -7,7 +7,13 @@ import {
 } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { completeOnboarding } from "../lib/api.js";
-import { CameraIcon, ShuffleIcon } from "lucide-react";
+import {
+  CameraIcon,
+  Globe,
+  LoaderIcon,
+  MapPinIcon,
+  ShuffleIcon,
+} from "lucide-react";
 import { LANGUAGES } from "../constants/index.js";
 
 const OnboardingPage = () => {
@@ -29,6 +35,10 @@ const OnboardingPage = () => {
       toast.success("Profile onboarded successfully");
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
+
+    onError: (error) => {
+      toast.error(error.response.data.message);
+    },
   });
 
   const handleSubmit = (e) => {
@@ -36,7 +46,12 @@ const OnboardingPage = () => {
     onboardingMutation(formState);
   };
 
-  const handleRandomAvatar = () => {};
+  const handleRandomAvatar = () => {
+    const idx = Math.floor(Math.random() * 100) + 1; //generates random number from 1-100
+    const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
+    setFormState({ ...formState, profilePic: randomAvatar });
+    toast.success("Random Profile Picture Generated!");
+  };
 
   return (
     <div
@@ -127,6 +142,7 @@ const OnboardingPage = () => {
                     })
                   }
                   className="select select-bordered w-full"
+                  required
                 >
                   <option value="">Select your Native Language</option>
                   {LANGUAGES.map((lang) => (
@@ -150,6 +166,7 @@ const OnboardingPage = () => {
                       learningLanguage: e.target.value,
                     })
                   }
+                  required
                   className="select select-bordered w-full"
                 >
                   <option value="">Select your Learning Language</option>
@@ -161,6 +178,45 @@ const OnboardingPage = () => {
                 </select>
               </div>
             </div>
+            {/* location */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Location</span>
+              </label>
+              <div className="relative">
+                <MapPinIcon className="absolute top-1/2 transform -translate-y-1/2 left-3 size-5 text-base-content opacity-70" />
+                <input
+                  type="text"
+                  name="location"
+                  value={formState.location}
+                  onChange={(e) =>
+                    setFormState({ ...formState, location: e.target.value })
+                  }
+                  className="input input-bordered w-full pl-10"
+                  placeholder="City, Country"
+                  required
+                />
+              </div>
+            </div>
+            {/* submit button */}
+
+            <button
+              className="bg-baseColor text-white font-bold py-2 px-4 rounded-xl hover:bg-opacity-90 hover:scale-105 transition-all duration-200 w-full flex justify-center"
+              disabled={isPending}
+              type="submit"
+            >
+              {!isPending ? (
+                <>
+                  <Globe className="size-5 mr-2 self-center" />
+                  Complete Onboarding
+                </>
+              ) : (
+                <>
+                  <LoaderIcon className="animate-spin-slow size-5 mr-2 self-center" />
+                  Onboarding....
+                </>
+              )}
+            </button>
           </form>
         </div>
       </div>
