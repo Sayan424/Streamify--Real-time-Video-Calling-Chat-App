@@ -100,7 +100,7 @@ const LoginPage = () => {
 
                   <button
                     type="submit"
-                    className="bg-baseColor text-white font-bold py-2 px-4 rounded-xl hover:bg-opacity-90 transition duration-200 w-full "
+                    className="bg-baseColor text-white font-bold py-3 px-4 rounded-xl hover:bg-opacity-90 transition duration-200 w-full mt-5"
                     disabled={isPending}
                   >
                     {isPending ? (
@@ -126,6 +126,26 @@ const LoginPage = () => {
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+
+        {/* image section */}
+        <div className="hidden lg:flex w-full lg:w-1/2 bg-baseColor/10 items-center justify-center">
+          <div className="max-w-md p-8">
+            {/* illlustration */}
+            <div className="relative aspect-square max-w-sm mx-auto">
+              <img
+                src="/ii.png"
+                alt="language connection illlustration"
+                className="w-full h-full"
+              />
+            </div>
+            <div className="text-center space-y-3  mt-6">
+              <h2 className="text-xl font-semibold">
+                Connect with others worldwide
+              </h2>
+              <p className="opacity-70">Chat & video call whatever you want</p>
+            </div>
           </div>
         </div>
       </div>
