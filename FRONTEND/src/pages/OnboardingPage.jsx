@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useAuthUser from "../../hooks/useAuthUser.js";
+import useAuthUser from "../hooks/useAuthUser.js";
 import {
   QueryClient,
   useMutation,
