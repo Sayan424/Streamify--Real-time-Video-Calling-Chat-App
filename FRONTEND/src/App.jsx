@@ -9,7 +9,7 @@ import CallPage from "./pages/CallPage.jsx";
 import OnboardingPage from "./pages/OnboardingPage.jsx";
 import { Toaster } from "react-hot-toast";
 import PageLoader from "./components/PageLoader.jsx";
-import useAuthUser from "../hooks/useAuthUser.js";
+import useAuthUser from "./hooks/useAuthUser.js";
 import Layout from "./components/Layout.jsx";
 
 const App = () => {
