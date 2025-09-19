@@ -3,7 +3,7 @@ import useAuthUser from "../hooks/useAuthUser";
 import { Link, useLocation } from "react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logout } from "../lib/api";
-import { BellIcon, Webhook } from "lucide-react";
+import { BellIcon, LogOutIcon, Webhook } from "lucide-react";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
@@ -17,8 +17,8 @@ const Navbar = () => {
 
   return (
     <nav className="bg-baseColor border border-baseColor sticky top-0 z-30 h-16 flex items-center">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-end w-full">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="flex items-center justify-end w-full space-x-6">
           {/* logo only if in chat page */}
           {isChatPage && (
             <div className="pl-5">
@@ -37,6 +37,16 @@ const Navbar = () => {
               </button>
             </Link>
           </div>
+          {/* user avatar */}
+          <div className="avatar">
+            <div className="w-9 rounded-full">
+              <img src={authUser?.profilePic} alt="Avatar" rel="noreferrer" />
+            </div>
+          </div>
+          {/* logout button */}
+          <button className="btn btn-circle btn-outline text-[#000]">
+            <LogOutIcon className="h-6 w-6  opacity-70 text-[#000]" />
+          </button>
         </div>
       </div>
     </nav>
