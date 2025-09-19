@@ -17,6 +17,7 @@ export default {
       gradient: "#c496f5",
       neutralColor: "#5C3C7D",
       avatarButton: "#ca98ffff",
+      notificationColor: "#929191",
     },
   },
   plugins: [daisyui],
