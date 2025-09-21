@@ -4,16 +4,19 @@ import { Link, useLocation } from "react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { logout } from "../lib/api";
 import { BellIcon, LogOutIcon, Webhook } from "lucide-react";
+import useLogout from "../hooks/useLogout";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
-  const queryClient = useQueryClient();
-  const { mutate: logoutMutation } = useMutation({
-    mutationFn: logout,
-    onSuccess: () => queryClient.invalidateQueries({ querykey: ["authUser"] }),
-  });
+  const { logoutMutation } = useLogout();
+
+  // const queryClient = useQueryClient();
+  // const { mutate: logoutMutation } = useMutation({
+  //   mutationFn: logout,
+  //   onSuccess: () => queryClient.invalidateQueries({ querykey: ["authUser"] }),
+  // });
 
   return (
     <nav className="bg-baseColor border border-baseColor sticky top-0 z-30 h-16 flex items-center">
@@ -39,12 +42,15 @@ const Navbar = () => {
           </div>
           {/* user avatar */}
           <div className="avatar">
-            <div className="w-9 rounded-full">
+            <div className="w-9 h-9 rounded-full">
               <img src={authUser?.profilePic} alt="Avatar" rel="noreferrer" />
             </div>
           </div>
           {/* logout button */}
-          <button className="btn btn-circle btn-outline text-[#000]">
+          <button
+            className="btn btn-circle btn-outline text-[#000]"
+            onClick={logoutMutation}
+          >
             <LogOutIcon className="h-6 w-6  opacity-70 text-[#000]" />
           </button>
         </div>
