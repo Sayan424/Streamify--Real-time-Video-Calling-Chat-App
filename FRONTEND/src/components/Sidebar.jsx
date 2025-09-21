@@ -2,13 +2,23 @@ import React from "react";
 3;
 import useAuthUser from "../hooks/useAuthUser.js";
 import { Link, useLocation } from "react-router";
-import { BellIcon, HomeIcon, UsersIcon, Webhook } from "lucide-react";
+import {
+  BellIcon,
+  HomeIcon,
+  LogOutIcon,
+  UsersIcon,
+  Webhook,
+} from "lucide-react";
+import { QueryClient, useMutation } from "@tanstack/react-query";
+import { logout } from "../lib/api.js";
+import useLogout from "../hooks/useLogout.js";
 
 const Sidebar = () => {
   const { authUser } = useAuthUser();
 
   const location = useLocation();
   const currentPath = location.pathname;
+  const { logoutMutation } = useLogout();
 
   return (
     <aside className="w-64 bg-base-200 hidden lg:flex flex-col h-screen sticky top-0 border-r border-baseColor">
@@ -65,6 +75,14 @@ const Sidebar = () => {
               <span className="size-2 rounded-full bg-success inline-block" />
               Online
             </p>
+          </div>
+          <div>
+            <button
+              className="btn btn-ghost btn-circle text-[#000]"
+              onClick={logoutMutation}
+            >
+              <LogOutIcon className="h-6 w-6  opacity-70 text-[#fff]" />
+            </button>
           </div>
         </div>
       </div>
