@@ -19,6 +19,7 @@ export default {
       avatarButton: "#ca98ffff",
       notificationColor: "#929191",
       notificationsdddColor: "#929195",
+      primary: "#8A48CE",
     },
   },
   plugins: [daisyui],
