@@ -163,7 +163,6 @@ export const THEMES = [
 ];
 
 export const LANGUAGES = [
-  "Bengali",
   "Hindi",
   "English",
   "Spanish",
