@@ -7,8 +7,14 @@ import {
   sendFriendRequest,
 } from "../lib/api";
 import { Link } from "react-router";
-import { MapPin, MapPinIcon, UsersIcon } from "lucide-react";
-import FriendCard, { getLanguageFlag } from "../components/FriendCard";
+import {
+  CheckCircleIcon,
+  MapPin,
+  MapPinIcon,
+  UserPlusIcon,
+  UsersIcon,
+} from "lucide-react";
+import FriendCard from "../components/FriendCard";
 import NoFriendsFound from "../components/NoFriendsFound";
 
 const HomePage = () => {
@@ -40,7 +46,8 @@ const HomePage = () => {
     const outgoingIds = new Set();
     if (outgoingFriendReqs && outgoingFriendReqs.length > 0) {
       outgoingFriendReqs.forEach((req) => {
-        outgoingIds.add(req.id);
+        console.log(req);
+        outgoingIds.add(req.recipient._id);
       });
       setOutgoingRequestsIds(outgoingIds);
     }
@@ -68,7 +75,7 @@ const HomePage = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {friends.map((friend) => (
-              <FriendCard key={friend.id} friend={friend} />
+              <FriendCard key={friend._id} friend={friend} />
             ))}
           </div>
         )}
@@ -128,7 +135,7 @@ const HomePage = () => {
                       </div>
 
                       {/* languages with flags */}
-                      <div className="flex flex-wrap gap-1.5">
+                      {/* <div className="flex flex-wrap gap-1.5">
                         <span className="badge badge-secondary">
                           {getLanguageFlag(user.nativeLanguage)}
                           Native: {capitialize(user.nativeLanguage)}
@@ -137,7 +144,33 @@ const HomePage = () => {
                           {getLanguageFlag(user.learningLanguage)}
                           Learning: {capitialize(user.learningLanguage)}
                         </span>
-                      </div>
+                      </div> 
+                      {user.bio && 
+                        <p className="text-sm opacity-70">{user.bio}</p>
+                      }
+                      */}
+                      {/* Request send button */}
+                      <button
+                        className={`btn w-full mt-2 ${
+                          hasRequestBeenSent
+                            ? "btn-disabled"
+                            : "btn btn-ghost bg-neutralColor"
+                        } `}
+                        onClick={() => sendRequestMutation(user._id)}
+                        disabled={hasRequestBeenSent || isPending}
+                      >
+                        {hasRequestBeenSent ? (
+                          <>
+                            <CheckCircleIcon className="size-4 mr-2" />
+                            Request Sent
+                          </>
+                        ) : (
+                          <>
+                            <UserPlusIcon className="size-4 mr-2" />
+                            Add Friend
+                          </>
+                        )}
+                      </button>
                     </div>
                   </div>
                 );
@@ -152,4 +185,4 @@ const HomePage = () => {
 
 export default HomePage;
 
-export const capitialize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+// const capitialize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
