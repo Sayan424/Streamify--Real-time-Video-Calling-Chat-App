@@ -2,13 +2,13 @@ import React from "react";
 import Sidebar from "./Sidebar.jsx";
 import Navbar from "./Navbar.jsx";
 
-const Layout = ({ children, showSidebar = false }) => {
+const Layout = ({ children, showSidebar = false, showNavbar = false }) => {
   return (
     <div className="min-h-screen" data-theme="forest">
       <div className="flex">
         {showSidebar && <Sidebar />}
         <div className="flex flex-1 flex-col">
-          <Navbar />
+          {showNavbar && <Navbar />}
           <main className="flex-1 overflow-y-auto">{children}</main>
         </div>
       </div>
